@@ -9,48 +9,46 @@ import SwiftUI
 import SwiftData
 
 struct MailBoxView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-    @State private var isOn = false
-    @AppStorage("isDarkMode") private var isDarkMode = false
-
+    @StateObject var viewModel = MessagesViewModel()
+    @State private var selectedMessage: Message? = nil
+    
     var body: some View {
-        
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        HStack(spacing: 0){
+            VStack(alignment: .leading, spacing: 0){
+                Text("Inbox")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 13.5)
+                Divider()
+                List(viewModel.messages, id: \.id) { message in
+                    MessageRow(message: message,  selectedMessage: $selectedMessage)
+                        .contentShape(Rectangle())
+                        .listRowInsets(EdgeInsets())
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            selectedMessage = message
+                        }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                .ignoresSafeArea()
+                .contentMargins(0)
+                .padding(0)
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .onAppear {
+                    viewModel.fetchMessages()
                 }
             }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            .frame(width: 300)
+            
+            Divider().ignoresSafeArea()
+            
+            Section{
+                if let selectedMessage = selectedMessage {
+                    MessageDetailView(message: selectedMessage)
+                } else {
+                    EmptyView()
+                }
             }
         }
     }
@@ -58,5 +56,4 @@ struct MailBoxView: View {
 
 #Preview {
     MailBoxView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

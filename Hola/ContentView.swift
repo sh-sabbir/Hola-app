@@ -9,40 +9,71 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @State var selected: Int? = nil
-    @State private var columnVisibility =
-        NavigationSplitViewVisibility.doubleColumn
+    @State private var selectedPage: String?
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
 
     var body: some View {
-        HStack(spacing:0){
-            NavigationStack {
-                NavigationLink(
-                    destination: Text("Paper Plane"),
-                    label: {
-                        Image(systemName: "paperplane")
+        
+        NavigationSplitView(columnVisibility: $columnVisibility) {
+            VStack{
+                List(selection: $selectedPage)  {
+                    NavigationLink(value: "mailbox"){
+                        Label("Mailbox", systemImage: "tray.fill")
+                            .labelStyle(.iconOnly)
+                            .frame(width: 50.0)
                     }
-                )
-                NavigationLink(
-                    destination: Text("Inbox"),
-                    label: {
-                        Image(systemName: "tray")
+                    .frame(height: 48.0)
+                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                    
+                    NavigationLink(value: "favorite"){
+                        Label("Saved", systemImage: "square.and.arrow.down.fill")
+                            .labelStyle(.iconOnly)
+                            .frame(width: 50.0)
                     }
-                )
+                    .frame(height: 48.0)
+                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                    
+                    Divider()
+                        .frame(width: 52.0)
+                    
+                    NavigationLink(value: "help"){
+                        Label("Help", systemImage: "questionmark.circle")
+                            .labelStyle(.iconOnly)
+                            .frame(width: 50.0)
+                    }
+                    .frame(height: 48.0)
+                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                    .accentColor(.purple)
+                }
+                .listItemTint(/*@START_MENU_TOKEN@*/.monochrome/*@END_MENU_TOKEN@*/)
+                .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .onAppear{
+                    Task { @MainActor in
+                        try await Task.sleep(for: .seconds(0.05))
+                        selectedPage = "mailbox"
+                    }
+                }
                 
                 Spacer()
-                
+
                 Toggle("", isOn: $isDarkMode)
                     .foregroundColor(.blue)
                     .toggleStyle(ThemeSwitcherStyle())
                     .padding()
+                
             }
-            .frame(width: 90)
             .background(.sidebar)
-
-            
-            MailBoxView()
+            .navigationSplitViewColumnWidth(84)
+        } content: {
+            Text("Content")
+        } detail: {
+            /*@START_MENU_TOKEN@*/Text("Detail")/*@END_MENU_TOKEN@*/
         }
+        .navigationSplitViewStyle(.balanced)
+        .background(.sidebar)
+        .listSectionSeparatorTint(.green)
     }
+        
 }
 
 #Preview {

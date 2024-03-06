@@ -16,6 +16,18 @@
 		D3105FE82B8FD783007DAE0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3105FE72B8FD783007DAE0B /* Colors.xcassets */; };
 		D3105FF12B90BD9D007DAE0B /* MailBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3105FF02B90BD9D007DAE0B /* MailBoxView.swift */; };
 		D3105FF32B912781007DAE0B /* hola.db in Resources */ = {isa = PBXBuildFile; fileRef = D3105FF22B912781007DAE0B /* hola.db */; };
+		D32C51912B9508250039DBCF /* hola-darwin-amd64 in Resources */ = {isa = PBXBuildFile; fileRef = D32C518F2B9508240039DBCF /* hola-darwin-amd64 */; };
+		D32C51922B9508250039DBCF /* hola-darwin-arm64 in Resources */ = {isa = PBXBuildFile; fileRef = D32C51902B9508250039DBCF /* hola-darwin-arm64 */; };
+		D32C51932B9508380039DBCF /* hola-darwin-amd64 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D32C518F2B9508240039DBCF /* hola-darwin-amd64 */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D32C51942B9508380039DBCF /* hola-darwin-arm64 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D32C51902B9508250039DBCF /* hola-darwin-arm64 */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D32C51962B9670570039DBCF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51952B9670570039DBCF /* MainView.swift */; };
+		D32C51992B9763540039DBCF /* AppLogoMini.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51982B9763540039DBCF /* AppLogoMini.swift */; };
+		D32C519B2B97D8C20039DBCF /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C519A2B97D8C20039DBCF /* EmptyView.swift */; };
+		D32C519F2B97DD7A0039DBCF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C519E2B97DD7A0039DBCF /* Message.swift */; };
+		D32C51A32B97DDC30039DBCF /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51A22B97DDC30039DBCF /* MessagesViewModel.swift */; };
+		D32C51A52B97DE200039DBCF /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51A42B97DE200039DBCF /* MessageRow.swift */; };
+		D32C51A72B97DFAE0039DBCF /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51A62B97DFAE0039DBCF /* MessageResponse.swift */; };
+		D32C51A92B98C2AC0039DBCF /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C51A82B98C2AC0039DBCF /* MessageDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +37,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				D32C51932B9508380039DBCF /* hola-darwin-amd64 in CopyFiles */,
+				D32C51942B9508380039DBCF /* hola-darwin-arm64 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +56,16 @@
 		D3105FE72B8FD783007DAE0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D3105FF02B90BD9D007DAE0B /* MailBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxView.swift; sourceTree = "<group>"; };
 		D3105FF22B912781007DAE0B /* hola.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hola.db; path = ../../../Downloads/hola.db; sourceTree = "<group>"; };
+		D32C518F2B9508240039DBCF /* hola-darwin-amd64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "hola-darwin-amd64"; sourceTree = "<group>"; };
+		D32C51902B9508250039DBCF /* hola-darwin-arm64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "hola-darwin-arm64"; sourceTree = "<group>"; };
+		D32C51952B9670570039DBCF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D32C51982B9763540039DBCF /* AppLogoMini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoMini.swift; sourceTree = "<group>"; };
+		D32C519A2B97D8C20039DBCF /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		D32C519E2B97DD7A0039DBCF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D32C51A22B97DDC30039DBCF /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		D32C51A42B97DE200039DBCF /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
+		D32C51A62B97DFAE0039DBCF /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		D32C51A82B98C2AC0039DBCF /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +98,17 @@
 		D3105FD32B8E1C0D007DAE0B /* Hola */ = {
 			isa = PBXGroup;
 			children = (
+				D32C519C2B97D9B50039DBCF /* Binaries */,
+				D32C51972B97633B0039DBCF /* Icons */,
+				D32C519D2B97DAFA0039DBCF /* Model */,
+				D32C51A02B97DD9D0039DBCF /* ViewModel */,
+				D32C51A12B97DDAB0039DBCF /* View */,
 				D3105FF22B912781007DAE0B /* hola.db */,
 				D3105FF02B90BD9D007DAE0B /* MailBoxView.swift */,
+				D32C519A2B97D8C20039DBCF /* EmptyView.swift */,
 				D3105FD42B8E1C0D007DAE0B /* HolaApp.swift */,
 				D3105FD62B8E1C0D007DAE0B /* ContentView.swift */,
+				D32C51952B9670570039DBCF /* MainView.swift */,
 				D3105FD82B8E1C0D007DAE0B /* Item.swift */,
 				D3105FE72B8FD783007DAE0B /* Colors.xcassets */,
 				D3105FDA2B8E1C0E007DAE0B /* Assets.xcassets */,
@@ -94,6 +125,49 @@
 				D3105FDD2B8E1C0E007DAE0B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D32C51972B97633B0039DBCF /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D32C51982B9763540039DBCF /* AppLogoMini.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		D32C519C2B97D9B50039DBCF /* Binaries */ = {
+			isa = PBXGroup;
+			children = (
+				D32C518F2B9508240039DBCF /* hola-darwin-amd64 */,
+				D32C51902B9508250039DBCF /* hola-darwin-arm64 */,
+			);
+			path = Binaries;
+			sourceTree = "<group>";
+		};
+		D32C519D2B97DAFA0039DBCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D32C519E2B97DD7A0039DBCF /* Message.swift */,
+				D32C51A62B97DFAE0039DBCF /* MessageResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D32C51A02B97DD9D0039DBCF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D32C51A22B97DDC30039DBCF /* MessagesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D32C51A12B97DDAB0039DBCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D32C51A42B97DE200039DBCF /* MessageRow.swift */,
+				D32C51A82B98C2AC0039DBCF /* MessageDetailView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +231,9 @@
 			files = (
 				D3105FE82B8FD783007DAE0B /* Colors.xcassets in Resources */,
 				D3105FF32B912781007DAE0B /* hola.db in Resources */,
+				D32C51922B9508250039DBCF /* hola-darwin-arm64 in Resources */,
 				D3105FDE2B8E1C0E007DAE0B /* Preview Assets.xcassets in Resources */,
+				D32C51912B9508250039DBCF /* hola-darwin-amd64 in Resources */,
 				D3105FDB2B8E1C0E007DAE0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,10 +246,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3105FD72B8E1C0D007DAE0B /* ContentView.swift in Sources */,
+				D32C519F2B97DD7A0039DBCF /* Message.swift in Sources */,
+				D32C51A32B97DDC30039DBCF /* MessagesViewModel.swift in Sources */,
+				D32C51962B9670570039DBCF /* MainView.swift in Sources */,
+				D32C51A72B97DFAE0039DBCF /* MessageResponse.swift in Sources */,
+				D32C51992B9763540039DBCF /* AppLogoMini.swift in Sources */,
 				D3105FF12B90BD9D007DAE0B /* MailBoxView.swift in Sources */,
+				D32C519B2B97D8C20039DBCF /* EmptyView.swift in Sources */,
 				D3105FD92B8E1C0D007DAE0B /* Item.swift in Sources */,
 				D3105FE62B8FCFC1007DAE0B /* ThemeSwitcherStyle.swift in Sources */,
+				D32C51A52B97DE200039DBCF /* MessageRow.swift in Sources */,
 				D3105FD52B8E1C0D007DAE0B /* HolaApp.swift in Sources */,
+				D32C51A92B98C2AC0039DBCF /* MessageDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var app: HolaApp?
@@ -18,11 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 @main
 struct HolaApp: App {
-    
     // MARK: - Properties
     @AppStorage("isDarkMode") private var isDarkMode = false
-    
     @State private var processInfo: String = "No process found on port 1525"
+    @State var isHolaRunning = false
     
     var task = Process()
     var sharedModelContainer: ModelContainer = {
@@ -38,16 +38,6 @@ struct HolaApp: App {
         }
     }()
     
-    // MARK: - Scene
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .preferredColorScheme(isDarkMode ? .dark : .light)
-                .frame(minWidth: 1376, idealWidth: 1376, maxWidth: .infinity, minHeight: 740, idealHeight: 740, maxHeight: .infinity, alignment: .leading)
-        }
-        .modelContainer(sharedModelContainer)
-    }
-    
     // MARK: - Initializers
     init() {
         let appDelegate = AppDelegate()
@@ -57,12 +47,23 @@ struct HolaApp: App {
         } else {
             NSApp.delegate = appDelegate
         }
-        
-        createDbFile()
-        checkProcessOnPort(port:1525)
-        startHolaServer()
     }
     
+    // MARK: - Scene
+    var body: some Scene {
+        WindowGroup {
+            MainView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
+                .frame(minWidth: 1376, idealWidth: 1376, maxWidth: .infinity, minHeight: 740, idealHeight: 740, maxHeight: .infinity, alignment: .leading)
+                .onAppear(perform: {
+                    createDbFile()
+                    checkProcessOnPort(port:1525)
+                    startHolaServer()
+                })
+        }
+        .modelContainer(sharedModelContainer)
+        .windowStyle(HiddenTitleBarWindowStyle())
+    }
     
     // MARK: - File Management
     func getDocumentsDirectory() -> URL {
@@ -106,11 +107,10 @@ struct HolaApp: App {
     
     // MARK: - Server Management
     func startHolaServer() {
-        
         let bundle = Bundle.main
         let execURL = bundle.url(forResource: "hola-darwin-arm64", withExtension: nil)
         guard execURL != nil else {
-            print("XIDEL executable could not be found!")
+            print("Hola executable could not be found!")
             return
         }
         self.task.executableURL = execURL!
@@ -118,15 +118,17 @@ struct HolaApp: App {
         
         do {
             try self.task.run()
-            print("XIDEL executed successfully!")
+            isHolaRunning = true
+            print("Hola started successfully!")
         } catch {
-            print("Error running XIDEL: \(error)")
+            print("Error running Hola: \(error)")
         }
     }
     
     func stopHolaServer() {
         // Terminate the server process if it's running
-        task.terminate()
+        checkProcessOnPort(port:1525)
+        isHolaRunning = false
         print("Hola terminated")
     }
     
