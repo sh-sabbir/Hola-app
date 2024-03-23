@@ -28,6 +28,7 @@ struct MailBoxView: View {
                         .ignoresSafeArea()
                         .onTapGesture {
                             selectedMessage = message
+                            viewModel.fetchMessageDetail(for: message.id)
                         }
                 }
                 .ignoresSafeArea()
@@ -44,12 +45,13 @@ struct MailBoxView: View {
             Divider().ignoresSafeArea()
             
             Section{
-                if let selectedMessage = selectedMessage {
-                    MessageDetailView(message: selectedMessage)
+                if let selectedMessage = viewModel.selectedMessageDetail {
+                    MessageDetailView(message:selectedMessage)
                 } else {
                     EmptyView()
                 }
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }

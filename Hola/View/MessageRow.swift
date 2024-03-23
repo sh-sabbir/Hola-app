@@ -23,7 +23,7 @@ struct MessageRow: View {
                 .fontWeight(.medium)
                 .foregroundStyle(.msgSub)
             Spacer(minLength: 5)
-            Text(message.snippet)
+            Text(message.snippet!)
                 .font(.system(size: 12))
                 .lineLimit(2)
                 .truncationMode(.tail)
