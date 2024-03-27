@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30E286E2BB39D9E00608229 /* HighlightSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D30E286D2BB39D9E00608229 /* HighlightSwift */; };
+		D30E28712BB3A69600608229 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D30E28702BB3A69600608229 /* SwiftSoup */; };
 		D3105FD52B8E1C0D007DAE0B /* HolaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3105FD42B8E1C0D007DAE0B /* HolaApp.swift */; };
 		D3105FD92B8E1C0D007DAE0B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3105FD82B8E1C0D007DAE0B /* Item.swift */; };
 		D3105FDB2B8E1C0E007DAE0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3105FDA2B8E1C0E007DAE0B /* Assets.xcassets */; };
@@ -75,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30E286E2BB39D9E00608229 /* HighlightSwift in Frameworks */,
+				D30E28712BB3A69600608229 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +194,10 @@
 			dependencies = (
 			);
 			name = Hola;
+			packageProductDependencies = (
+				D30E286D2BB39D9E00608229 /* HighlightSwift */,
+				D30E28702BB3A69600608229 /* SwiftSoup */,
+			);
 			productName = Hola;
 			productReference = D3105FD12B8E1C0D007DAE0B /* Hola.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +226,10 @@
 				Base,
 			);
 			mainGroup = D3105FC82B8E1C0D007DAE0B;
+			packageReferences = (
+				D30E286C2BB39D9E00608229 /* XCRemoteSwiftPackageReference "highlightswift" */,
+				D30E286F2BB3A69600608229 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = D3105FD22B8E1C0D007DAE0B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -393,7 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hola/Hola.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -420,7 +432,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hola/Hola.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -463,6 +475,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D30E286C2BB39D9E00608229 /* XCRemoteSwiftPackageReference "highlightswift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appstefan/highlightswift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
+		D30E286F2BB3A69600608229 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D30E286D2BB39D9E00608229 /* HighlightSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D30E286C2BB39D9E00608229 /* XCRemoteSwiftPackageReference "highlightswift" */;
+			productName = HighlightSwift;
+		};
+		D30E28702BB3A69600608229 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D30E286F2BB3A69600608229 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D3105FC92B8E1C0D007DAE0B /* Project object */;
 }

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import HighlightSwift
+import SwiftSoup
 
 struct MessageDetailView: View {
     let message: Message
@@ -66,16 +68,14 @@ struct MessageDetailView: View {
                 }
             }
             .padding()
-            .overlay(
-                    RoundedRectangle(cornerRadius: 8, style: RoundedCornerStyle.continuous)
-                        .stroke(.msgBorder, lineWidth: 1)
-                )
+            .overlay(RoundedRectangle(cornerRadius: 8, style: RoundedCornerStyle.continuous)
+                    .stroke(.msgBorder, lineWidth: 1))
             
             Spacer()
                 .frame(height: 14.0)
             
             // Custom tab bar
-            HStack() {
+            HStack(spacing:16) {
                 HolaTab(index: 0, name: "HTML", isSelected: selectedTab == 0) {
                     self.selectedTab = 0
                 }
@@ -114,25 +114,88 @@ struct MessageDetailView: View {
         .padding([.leading, .bottom, .trailing], 40.0)
     }
     
+    private func indentHTML(_ htmlString: String) -> String {
+        do {
+            let doc: Document = try SwiftSoup.parse(htmlString)
+            let cleanHtml: String = try doc.outerHtml()
+            return cleanHtml
+        } catch Exception.Error(_, let message) {
+            return message
+        } catch {
+            return ""
+        }
+    }
+    
     // Content for each tab based on the selected tab index
     @ViewBuilder
     func tabContent() -> some View {
+        
+        // MARK: - HTML Preview
         if selectedTab == 0 {
-            MessagePreview(html: message.html ?? "")
+            let msgHTML = (message.html ?? "")
+            MessagePreview(html: msgHTML)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        } else if selectedTab == 1 {
+        }
+        // MARK: - HTML Source Code
+        else if selectedTab == 1 {
             ScrollView(.vertical){
-                Text(message.html ?? "")
-                    .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                if let textContent = message.html {
+                    CodeText(indentHTML(textContent))
+                        .codeTextLanguage(.html)
+                        .codeTextColors(.theme(.atomOne))
+                        .monospaced()
+                } else {
+                    Text("No HTML content available")
+                }
+                    
             }
+            .padding(16.0)
+            .background(RoundedRectangle(cornerRadius: 8, style: RoundedCornerStyle.continuous)
+                    .fill(Color.themeSwitchBG))
+            
+        }
+        // MARK: - Email Text version
+        else if selectedTab == 2 {
+            ScrollView(.vertical){
+                if let textContent = message.text {
+                    LazyVStack(spacing:0){
+                        ForEach(Array(textContent.components(separatedBy: "\r\n").enumerated()), id: \.offset) { index, line in
+                            Text(line)
+                                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                        }
+                    }
+                }
+            }
+            .padding(16.0)
+            .frame(maxWidth: .infinity, maxHeight: .infinity,alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 8, style: RoundedCornerStyle.continuous)
+                    .fill(Color.themeSwitchBG))
+            
+        }
+        // MARK: - Raw Email
+        else if selectedTab == 3 {
+            ScrollView(.vertical){
+                if let textContent = message.raw {
+                    LazyVStack(spacing:0){
+                        ForEach(Array(textContent.components(separatedBy: "\r\n").enumerated()), id: \.offset) { index, line in
+                            Text(line)
+                                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                        }
+                    }
+                }
+            }
+            .padding(16.0)
+            .frame(maxWidth: .infinity, maxHeight: .infinity,alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 8, style: RoundedCornerStyle.continuous)
+                    .fill(Color.themeSwitchBG))
             
         } else {
             Text("Profile Content")
         }
     }
 }
-
-
 
 struct HolaTab: View {
     let index: Int
@@ -146,7 +209,36 @@ struct HolaTab: View {
                 .font(.headline)
                 .foregroundColor(isSelected ? .blue : .gray)
         }
+        .buttonStyle(HolaTabStyle(selectedPage: isSelected))
         .frame(alignment: .leading)
+    }
+}
+
+struct HolaTabStyle: ButtonStyle {
+    var selectedPage: Bool
+    @State private var isHovered = false
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding(/*@START_MENU_TOKEN@*/.horizontal, 20.0/*@END_MENU_TOKEN@*/)
+            .padding(.vertical, 8)
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(selectedPage ? Color.sidebarTint : Color.clear)
+                        
+                    if isHovered && !selectedPage {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.sidebarTint.opacity(0.3))
+                    }
+                }
+            )
+            .onHover { hovering in
+                withAnimation {
+                    isHovered = hovering
+                }
+            }
+            .foregroundColor(.primary)
     }
 }
 
@@ -171,7 +263,9 @@ struct MessageDetailView_Previews: PreviewProvider {
             text: nil,
             html: nil,
             attachments: nil,
-            inline: nil
+            inline: nil,
+            raw: nil,
+            headers: nil
         )
         return MessageDetailView(message: sampleMessage).frame(width: 940,height: 740)
     }

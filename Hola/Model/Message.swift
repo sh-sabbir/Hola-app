@@ -23,6 +23,8 @@ struct Message: Codable, Identifiable {
     let text, html: String?
     let attachments: [String]?
     let inline: [String]?
+    let raw: String?
+    let headers: Headers?
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
@@ -44,6 +46,8 @@ struct Message: Codable, Identifiable {
         case inline = "Inline"
         case attachments = "Attachments"
         case snippet = "Snippet"
+        case raw = "Raw"
+        case headers = "Headers"
     }
     
     func formattedSize() -> String {
@@ -59,7 +63,7 @@ struct Message: Codable, Identifiable {
     }
 }
 
-// MARK: - From
+// MARK: - Person
 struct Person: Codable {
     let name: String
     let address: String
@@ -67,5 +71,24 @@ struct Person: Codable {
     enum CodingKeys: String, CodingKey {
         case name = "Name"
         case address = "Address"
+    }
+}
+
+// MARK: - Headers
+struct Headers: Codable {
+    let contentType, date, from, messageID: String
+    let mimeVersion, received, returnPath, subject: String
+    let to: String
+
+    enum CodingKeys: String, CodingKey {
+        case contentType = "Content-Type"
+        case date = "Date"
+        case from = "From"
+        case messageID = "Message-Id"
+        case mimeVersion = "Mime-Version"
+        case received = "Received"
+        case returnPath = "Return-Path"
+        case subject = "Subject"
+        case to = "To"
     }
 }
